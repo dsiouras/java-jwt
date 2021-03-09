@@ -42,7 +42,7 @@ class RSAAlgorithm extends Algorithm {
         byte[] signatureBytes = Base64.decodeBase64(jwt.getSignature());
 
         try {
-            RSAPublicKey publicKey = keyProvider.getPublicKeyById(jwt.getKeyId());
+            RSAPublicKey publicKey = keyProvider.getPublicKeyById(String.valueOf(jwt.getClaim("kid")));
             if (publicKey == null) {
                 throw new IllegalStateException("The given Public Key is null.");
             }
